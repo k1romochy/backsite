@@ -9,9 +9,12 @@ from item.schemas import ItemCreate
 
 
 async def create_item(item: ItemCreate, session: AsyncSession) -> None:
-    session.add(item)
+    item_db = Item(**item.model_dump())
+    session.add(item_db)
 
     await session.commit()
+    await session.refresh(item_db)
+    return item_db
 
 
 async def delete_item_by_id(item_id: int, session: AsyncSession) -> None:

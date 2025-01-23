@@ -5,11 +5,14 @@ from annotated_types import MaxLen, MinLen
 
 
 class ItemModel(BaseModel):
-    id: int
     name: str
     quantity: int
 
-    model_config = ConfigDict(from_attributes=True)
+
+class Item(ItemModel):
+    id: int
+
+    model_config = ConfigDict(from_attributes=True, arbitrary_types_allowed=True)
 
 
 class ItemCreate(ItemModel):

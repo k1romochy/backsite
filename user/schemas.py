@@ -3,13 +3,16 @@ from typing import Optional
 
 
 class UserModel(BaseModel):
-    id: int
     name: str
     email: EmailStr
     role: Optional[str] = "User"
 
-    model_config = ConfigDict(from_attributes=True)
+
+class User(UserModel):
+    id: int
+
+    model_config = ConfigDict(from_attributes=True, arbitrary_types_allowed=True)
 
 
-class UserCreate(BaseModel):
+class UserCreate(UserModel):
     pass
