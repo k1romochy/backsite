@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
-from . import User
+from .user import User
 from .base import Base
 
 
