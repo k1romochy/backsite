@@ -5,9 +5,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
 
 from core.models.user import User
+from user.schemas import UserCreate
 
 
-async def create_user(user: User, session: AsyncSession) -> None:
+async def create_user(user: UserCreate, session: AsyncSession) -> None:
     session.add(user)
 
     await session.commit()

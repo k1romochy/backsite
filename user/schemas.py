@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 from typing import Optional
 
 
@@ -8,11 +8,8 @@ class UserModel(BaseModel):
     email: EmailStr
     role: Optional[str] = "User"
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserCreate(BaseModel):
-    name: str
-    email: EmailStr
-    role: Optional[str] = "User"
+    pass

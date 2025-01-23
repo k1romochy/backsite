@@ -4,12 +4,13 @@ from typing import Annotated
 from annotated_types import MaxLen, MinLen
 
 
-class ItemBase(BaseModel):
+class ItemModel(BaseModel):
+    id: int
     name: str
     quantity: int
 
-
-class Item(ItemBase):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+
+class ItemCreate(ItemModel):
+    pass

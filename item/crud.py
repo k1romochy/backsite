@@ -5,9 +5,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
 
 from core.models.item import Item
+from item.schemas import ItemCreate
 
 
-async def create_item(item: Item, session: AsyncSession) -> None:
+async def create_item(item: ItemCreate, session: AsyncSession) -> None:
     session.add(item)
 
     await session.commit()
