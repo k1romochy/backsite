@@ -1,15 +1,18 @@
-from pydantic import BaseModel, EmailStr, Field, ConfigDict
-
-from typing import Annotated
-from annotated_types import MaxLen, MinLen
+from pydantic import BaseModel, EmailStr
+from typing import Optional
 
 
-class UserBase(BaseModel):
-    username: str
-    email: str
-
-
-class User(UserBase):
-    model_config = ConfigDict(from_attributes=True)
-
+class UserModel(BaseModel):
     id: int
+    name: str
+    email: EmailStr
+    role: Optional[str] = "User"
+
+    class Config:
+        orm_mode = True
+
+
+class UserCreate(BaseModel):
+    name: str
+    email: EmailStr
+    role: Optional[str] = "User"
