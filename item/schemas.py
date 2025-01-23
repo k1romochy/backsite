@@ -6,7 +6,7 @@ from annotated_types import MaxLen, MinLen
 
 class ItemBase(BaseModel):
     name: str
-    count: int
+    quantity: int
 
 
 class Item(ItemBase):

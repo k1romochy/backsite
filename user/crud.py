@@ -17,11 +17,12 @@ async def get_users(session: AsyncSession):
     stmt = select(User).order_by(User.id)
     result: Result = await session.execute(stmt)
     users = result.scalars().all()
-    return list(users)
+    return users
 
 
-async def delete_user(session: AsyncSession, user: User) -> None:
-    await session.delete(user)
+async def delete_user_by_id(session: AsyncSession, user_id: int) -> None:
+    stmt = select(User).where(User.id == user_id)
+    await session.delete(stmt)
     await session.commit()
 
 
