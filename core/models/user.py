@@ -3,7 +3,9 @@ from typing import TYPE_CHECKING
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from .base import Base
-from .item import Item
+
+if TYPE_CHECKING:
+    from .item import Item
 
 
 class User(Base):
@@ -11,4 +13,4 @@ class User(Base):
     email: Mapped[str] = mapped_column(unique=True)
     role: Mapped[str] = mapped_column(server_default='User')
 
-    items: Mapped[list[Item]] = relationship('Item', back_populates='user')
+    items: Mapped[list['Item']] = relationship('Item', back_populates='user')
