@@ -21,3 +21,9 @@ async def create_item(item_in: ItemCreate, session: AsyncSession = Depends(db_he
 @router.get('/{item_id}/', response_model=Item)
 async def get_item(item_id: int, session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.get_item(item_id=item_id, session=session)
+
+
+@router.post('/{item_id}/update/', response_model = Item)
+async def update_item(item_id: int, new_quantity: int,
+                      session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+    return await item.update_item_quantity(item_id=item_id, new_quantity=new_quantity, session=session)

@@ -1,4 +1,6 @@
-from fastapi import status
+from multiprocessing.managers import Value
+
+from fastapi import status, HTTPException
 
 from sqlalchemy import select, Result, Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -30,7 +32,7 @@ async def get_items(session: AsyncSession) -> Sequence[Item]:
     return items
 
 
-async def update_item_quantity(item_id: int, session: AsyncSession, new_quantity: int) -> None:
+async def update_item_quantity(item_id: int, session: AsyncSession, new_quantity: int) -> Item | None:
     stmt = select(Item).where(Item.id == item_id)
 
     result = await session.execute(stmt)
@@ -39,13 +41,28 @@ async def update_item_quantity(item_id: int, session: AsyncSession, new_quantity
     if item:
         item.quantity = new_quantity
         await session.commit()
+        return item
     else:
-        raise ValueError(f"Item with id {item_id} not found.")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
 
 
 async def get_item(item_id: int, session: AsyncSession) -> Item:
     stmt = select(Item).where(Item.id == item_id)
     result: Result = await session.execute(stmt)
-    item = result.scalar()
+    item = result.scalar_one_or_none()
 
-    return item
+    if item is not None:
+        return item
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+
+
+async def item_with_user(item_id: int, session: AsyncSession) -> Item:
+    stmt = select(Item).options(joinedload(Item.user)).where(Item.id == item_id)
+    result = await session.execute(stmt)
+    item = result.scalar_one_or_none()
+
+    if item is not None:
+        return item
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
