@@ -27,3 +27,14 @@ async def get_item(item_id: int, session: AsyncSession = Depends(db_helper.scope
 async def update_item(item_id: int, new_quantity: int,
                       session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.update_item_quantity(item_id=item_id, new_quantity=new_quantity, session=session)
+
+
+@router.get('/{item_id}/user/', response_model=Item)
+async def get_item_with_user(item_id: int,
+                             session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+    return await item.get_item_with_user(item_id=item_id, session=session)
+
+
+@router.delete('{item_id}/delete/', response_model=Item)
+async def delete_item(item_id: int, session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+    await item.delete_item_by_id(item_id=item_id, session=session)

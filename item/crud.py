@@ -1,4 +1,5 @@
 from multiprocessing.managers import Value
+from typing import Optional
 
 from fastapi import status, HTTPException
 
@@ -20,8 +21,14 @@ async def create_item(item: ItemCreate, session: AsyncSession) -> Item:
 
 async def delete_item_by_id(item_id: int, session: AsyncSession) -> None:
     stmt = select(Item).where(Item.id == item_id)
-    await session.delete(stmt)
-    await session.commit()
+    result = await session.execute(stmt)
+    item = result.scalar_one_or_none()
+
+    if item is not None:
+        await session.delete(stmt)
+        await session.commit()
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
 
 
 async def get_items(session: AsyncSession) -> Sequence[Item]:
@@ -32,7 +39,7 @@ async def get_items(session: AsyncSession) -> Sequence[Item]:
     return items
 
 
-async def update_item_quantity(item_id: int, session: AsyncSession, new_quantity: int) -> Item | None:
+async def update_item_quantity(item_id: int, session: AsyncSession, new_quantity: int) -> Optional[Item]:
     stmt = select(Item).where(Item.id == item_id)
 
     result = await session.execute(stmt)
@@ -40,6 +47,7 @@ async def update_item_quantity(item_id: int, session: AsyncSession, new_quantity
 
     if item:
         item.quantity = new_quantity
+        session.add(item)
         await session.commit()
         return item
     else:
@@ -57,7 +65,7 @@ async def get_item(item_id: int, session: AsyncSession) -> Item:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
 
 
-async def item_with_user(item_id: int, session: AsyncSession) -> Item:
+async def get_item_with_user(item_id: int, session: AsyncSession) -> Item:
     stmt = select(Item).options(joinedload(Item.user)).where(Item.id == item_id)
     result = await session.execute(stmt)
     item = result.scalar_one_or_none()
