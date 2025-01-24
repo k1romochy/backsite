@@ -13,6 +13,7 @@ if TYPE_CHECKING:
 class Item(Base):
     name: Mapped[str] = mapped_column(nullable=False)
     quantity: Mapped[int] = mapped_column(nullable=False)
+    condition: Mapped[str]
 
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id'), nullable=False)
     user: Mapped['User'] = relationship('User', back_populates='items')

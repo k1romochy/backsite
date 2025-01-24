@@ -3,6 +3,7 @@ from typing import Type
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException, status
+from sqlalchemy.orm import selectinload
 
 from core.models.user import User
 from user.schemas import UserCreate
@@ -33,3 +34,14 @@ async def get_user(session: AsyncSession, user_id: int) -> Type[User]:
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return user
+
+
+async def get_user_with_items(user_id: int, session: AsyncSession) -> User:
+    stmt = select(User).options(selectinload(User.items)).where(User.id == user_id)
+    result = await session.execute(stmt)
+
+    user = result.scalar_one_or_none()
+    if user is not None:
+        return user
+    else:
+        raise ValueError('User with this id not found')
