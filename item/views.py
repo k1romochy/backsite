@@ -35,6 +35,6 @@ async def get_item_with_user(item_id: int,
     return await item.get_item_with_user(item_id=item_id, session=session)
 
 
-@router.delete('{item_id}/delete/', response_model=Item)
+@router.delete('/{item_id}/', response_model=Item)
 async def delete_item(item_id: int, session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     await item.delete_item_by_id(item_id=item_id, session=session)

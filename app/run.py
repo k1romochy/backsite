@@ -5,6 +5,7 @@ from fastapi import FastAPI, Body, Path
 from app.gen_router import router as general_router
 from user.views import router as user_router
 from item.views import router as item_router
+from auth.jwt_auth import router as auth_router
 
 from core.models.base import Base
 from core.models.db_helper import db_helper
@@ -26,6 +27,7 @@ app = FastAPI(lifespan = lifespan)
 app.include_router(user_router)
 app.include_router(general_router)
 app.include_router(item_router)
+app.include_router(auth_router)
 
 
 @app.get('/')

@@ -3,9 +3,10 @@ from typing import Optional
 
 
 class UserModel(BaseModel):
-    name: str
+    username: str
     email: EmailStr
     role: Optional[str] = "User"
+    password: bytes
 
 
 class User(UserModel):

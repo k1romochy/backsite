@@ -14,14 +14,9 @@ async def get_users(session: AsyncSession = Depends(db_helper.scoped_session_dep
     return await user.get_users(session=session)
 
 
-@router.post('/create_user/', response_model=User)
-async def create_user(user_in: UserCreate, session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
-    return await user.create_user(user=user_in, session=session)
-
-
 @router.get('/{user_id}/', response_model=User)
 async def get_user(user_id: int, session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
-    return await user.get_user(user_id=user_id, session=session)
+    return await user.get_user_by_id(user_id=user_id, session=session)
 
 
 @router.get('/{user_id}/items', response_model=User)
