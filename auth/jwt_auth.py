@@ -27,6 +27,7 @@ async def validate_auth_user(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency)
 ):
     user = await get_user_by_username(username=username, session=session)
+
     if not user or not auth_utils.validate_password(password=password, hashed_password=user.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='invalid username or password')
     return user
