@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="sch" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;k1romochy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/k1romochy/backsite.git&quot;,
+    &quot;accountId&quot;: &quot;45828edd-c8b6-470b-b9cc-134fdc45e5a6&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2s1h1NA9bqVGEOx1VZAvOoUTHXM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.run.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "sch",
+    "settings.editor.selected.configurable": "vcs.Git"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="" />
+      <created>1737628771980</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737628771980</updated>
+    </task>
+    <task id="LOCAL-00001" summary="create item model, create relationship user with items o2m">
+      <option name="closed" value="true" />
+      <created>1737632903811</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737632903811</updated>
+    </task>
+    <task id="LOCAL-00002" summary="crud and any function with item, add quantity del count">
+      <option name="closed" value="true" />
+      <created>1737634160562</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1737634160562</updated>
+    </task>
+    <task id="LOCAL-00003" summary="crud and any function with item, add quantity del count, some views, bag with cincular import">
+      <option name="closed" value="true" />
+      <created>1737634809069</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737634809069</updated>
+    </task>
+    <task id="LOCAL-00004" summary="sinc with base line">
+      <option name="closed" value="true" />
+      <created>1737711423875</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1737711423875</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix bags with model requests">
+      <option name="closed" value="true" />
+      <created>1737712068089</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737712068089</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix bags, create any requests">
+      <option name="closed" value="true" />
+      <created>1737712884334</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737712884334</updated>
+    </task>
+    <task id="LOCAL-00007" summary="control sch commit, fix bags and create views">
+      <option name="closed" value="true" />
+      <created>1737713507553</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1737713507553</updated>
+    </task>
+    <task id="LOCAL-00008" summary="sch">
+      <option name="closed" value="true" />
+      <created>1737960720000</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1737960720000</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="create item model, create relationship user with items o2m" />
+    <MESSAGE value="crud and any function with item, add quantity del count" />
+    <MESSAGE value="crud and any function with item, add quantity del count, some views, bag with cincular import" />
+    <MESSAGE value="sinc with base line" />
+    <MESSAGE value="fix bags with model requests" />
+    <MESSAGE value="fix bags, create any requests" />
+    <MESSAGE value="control sch commit, fix bags and create views" />
+    <MESSAGE value="sch" />
+    <option name="LAST_COMMIT_MESSAGE" value="sch" />
+  </component>
+</project>
