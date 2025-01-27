@@ -17,4 +17,4 @@ class Item(ItemModel):
 
 
 class ItemCreate(ItemModel):
-    pass
+    user_id: int
