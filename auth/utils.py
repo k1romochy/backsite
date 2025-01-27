@@ -5,11 +5,11 @@ from core.config import settings
 
 
 def get_private_key() -> str:
-    return settings.auth_jwt.private_path_key.read_text()
+    return settings.auth_jwt.private_key_path.read_text()
 
 
 def get_public_key() -> str:
-    return settings.auth_jwt.public_path_key.read_text()
+    return settings.auth_jwt.public_key_path.read_text()
 
 
 def encode_jwt(

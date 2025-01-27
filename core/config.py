@@ -9,9 +9,12 @@ from os import getenv
 load_dotenv()
 
 
-class AuthJWT(BaseModel):
-    private_path_key: Path = Path('auth/jwt-private.pem')
-    public_path_key: Path = Path('auth/jwt-public.pem')
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+class AuthJWT:
+    private_key_path = BASE_DIR / 'auth' / 'jwt-private.pem'
+    public_key_path = BASE_DIR / 'auth' / 'jwt-public.pem'
     algorithm: str = 'RS256'
     access_token_expire_minutes: int = 15
 

@@ -1,4 +1,3 @@
-from multiprocessing.managers import Value
 from typing import Optional
 
 from fastapi import status, HTTPException
@@ -9,6 +8,7 @@ from sqlalchemy.orm import selectinload, joinedload
 
 from core.models.item import Item
 from item.schemas import ItemCreate
+
 
 async def create_item(item: ItemCreate, session: AsyncSession) -> Item:
     item_db = Item(**item.model_dump())

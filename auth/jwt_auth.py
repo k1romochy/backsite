@@ -63,14 +63,17 @@ async def get_current_user(
     )
 
     algorithm = algorithm or settings.auth_jwt.algorithm
-    public_key = public_key or get_public_key()
+
+    if public_key is None:
+        public_key = get_public_key()
 
     try:
         payload = jwt.decode(token, public_key, algorithms=[algorithm])
         user_id: int = payload.get("sub")
         if user_id is None:
             raise credentials_exception
-    except JWTError:
+    except JWTError as e:
+        print(f"Error decoding JWT: {str(e)}")
         raise credentials_exception
 
     user = await session.get(User, user_id)

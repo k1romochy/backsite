@@ -7,6 +7,8 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import selectinload
 
 from core.models.user import User
+from user.schemas import UserCreate
+import auth.utils as auth_utils
 
 
 async def get_users(session: AsyncSession):
@@ -49,17 +51,19 @@ async def get_user_by_username(username: str, session: AsyncSession) -> User:
         raise ValueError('User with this id not found')
 
 
-async def registrate_user(user: User, session: AsyncSession):
+async def registrate_user(user: UserCreate, session: AsyncSession):
     result = await session.execute(select(User).where(User.username == user.username))
     existing_user = result.scalars().first()
 
     if existing_user:
         raise HTTPException(status_code=400, detail='User  with this username already exists')
 
-    user.password = bcrypt.hashpw(user.password.encode(), bcrypt.gensalt()).decode()
+    user.password = bcrypt.hashpw(user.password.encode(), bcrypt.gensalt())
 
-    session.add(user)
+    user_db = User(**user.model_dump())
+
+    session.add(user_db)
     await session.commit()
-    await session.refresh(user)
+    await session.refresh(user_db)
 
-    return user
+    return user_db
