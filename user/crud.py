@@ -1,5 +1,6 @@
 from typing import Type, Sequence
 
+import bcrypt
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException, status
@@ -46,3 +47,19 @@ async def get_user_by_username(username: str, session: AsyncSession) -> User:
         return user
     else:
         raise ValueError('User with this id not found')
+
+
+async def registrate_user(user: User, session: AsyncSession):
+    result = await session.execute(select(User).where(User.username == user.username))
+    existing_user = result.scalars().first()
+
+    if existing_user:
+        raise HTTPException(status_code=400, detail='User  with this username already exists')
+
+    user.password = bcrypt.hashpw(user.password.encode(), bcrypt.gensalt()).decode()
+
+    session.add(user)
+    await session.commit()
+    await session.refresh(user)
+
+    return user

@@ -6,7 +6,7 @@ class UserModel(BaseModel):
     username: str
     email: EmailStr
     role: Optional[str] = "User"
-    password: bytes
+    password: str
 
 
 class User(UserModel):

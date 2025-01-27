@@ -15,10 +15,18 @@ async def get_users(session: AsyncSession = Depends(db_helper.scoped_session_dep
 
 
 @router.get('/{user_id}/', response_model=User)
-async def get_user(user_id: int, session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+async def get_user(user_id: int,
+                   session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await user.get_user_by_id(user_id=user_id, session=session)
 
 
 @router.get('/{user_id}/items', response_model=User)
-async def get_user_items(user_id: int, session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+async def get_user_items(user_id: int,
+                         session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await user.get_user_with_items(user_id=user_id, session=session)
+
+
+@router.post('/registrate/', response_model=User)
+async def register_user(user: User,
+                        session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+    return await user.registrate_user(user=user, session=session)
