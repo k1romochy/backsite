@@ -6,6 +6,7 @@ from .base import Base
 
 if TYPE_CHECKING:
     from .item import Item
+    from .cookie import SessionModel
 
 
 class User(Base):
@@ -15,3 +16,5 @@ class User(Base):
     role: Mapped[str] = mapped_column(nullable=False, server_default='User')
 
     items: Mapped[list['Item']] = relationship('Item', back_populates='user')
+    session: Mapped['SessionModel'] = relationship('SessionModel', back_populates='user',
+                                                    cascade="all, delete-orphan")

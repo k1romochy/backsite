@@ -22,7 +22,7 @@ class AuthJWT:
 class Settings(BaseSettings):
     db_url: str = os.getenv('POSTGRES_URL')
     SECRET_KEY: str = os.getenv('SECRET_KEY')
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
     auth_jwt: AuthJWT = AuthJWT()
 
 

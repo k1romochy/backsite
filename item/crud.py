@@ -7,16 +7,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
 
 from core.models.item import Item
-from item.schemas import ItemCreate
 
 
-async def create_item(item: ItemCreate, session: AsyncSession) -> Item:
-    item_db = Item(**item.model_dump())
-    session.add(item_db)
+async def create_item(item: Item, session: AsyncSession) -> Item:
+    session.add(item)
 
     await session.commit()
-    await session.refresh(item_db)
-    return item_db
+    await session.refresh(item)
+    return item
 
 
 async def delete_item_by_id(item_id: int, session: AsyncSession) -> None:

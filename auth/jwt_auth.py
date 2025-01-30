@@ -1,83 +1,63 @@
 import os
+import uuid
+
 import jwt
 from dotenv import load_dotenv
+from jwt import ExpiredSignatureError
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import APIRouter, Depends, Form, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi import APIRouter, Depends, Form, HTTPException, status, Header, Response, Cookie
+from fastapi.security import HTTPAuthorizationCredentials
 from auth import utils as auth_utils
-from auth.utils import get_private_key, get_public_key
-from core.config import settings
+from auth.crud import validate_auth_user, create_session, delete_session, get_current_user
 from core.models.db_helper import db_helper
-from user.schemas import User
+from core.models.user import User
 from auth.jwt_model import Token
 from user.crud import get_user_by_username
-from jose import JWTError
+from user.schemas import UserModel
 
-load_dotenv()
-
-SECRET_KEY = os.getenv('SECRET_KEY')
-ALGORITHM = settings.auth_jwt.algorithm
-
-router = APIRouter(prefix='/jwt', tags=['JWT'])
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="jwt/login/")
+router = APIRouter(prefix='/auth', tags=['auth'])
+COOKIE_SESSION_ID_KEY = 'web-app-session-id'
 
 
-async def validate_auth_user(
-    username: str = Form(),
-    password: str = Form(),
-    session: AsyncSession = Depends(db_helper.scoped_session_dependency)
+@router.post("/login/", response_model=Token)
+async def auth_user_jwt(
+    response: Response,
+    username: str = Form(...),
+    password: str = Form(...),
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
     user = await get_user_by_username(username=username, session=session)
 
-    if not user or not auth_utils.validate_password(password=password, hashed_password=user.password):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='invalid username or password')
-    return user
+    if not user or not auth_utils.validate_password(password, user.password):
+        raise HTTPException(status_code=401, detail="Invalid username or password")
 
-
-@router.post('/login/', response_model=Token)
-async def auth_user_jwt(
-    username: str = Form(...),
-    password: str = Form(...),
-    session: AsyncSession = Depends(db_helper.scoped_session_dependency)
-):
-    user = await validate_auth_user(username=username, password=password, session=session)
-    jwt_payload = {
-        'sub': user.id,
-        'username': user.username,
-        'email': user.email
-    }
+    jwt_payload = {"sub": user.username, "user_id": user.id, "email": user.email}
     token = auth_utils.encode_jwt(jwt_payload)
-    return Token(access_token=token, token_type='Bearer')
+
+    session_id = str(uuid.uuid4())
+    await create_session(user.id, session_id, session)
+
+    response.set_cookie(session_id)
+
+    return Token(access_token=token, token_type="Bearer")
 
 
-async def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
-    algorithm: str | None = 'RS256',
-    public_key: str | None = None
+@router.get('/me/')
+async def get_me(current_user: UserModel = Depends(get_current_user)):
+    return {'username': current_user.username,
+            'user_id': current_user.id}
+
+
+@router.post("/logout/")
+async def logout(
+        response: Response,
+        session_id: str = Cookie(None),
+        session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
 
-    algorithm = algorithm or settings.auth_jwt.algorithm
+    if session_id:
+        await delete_session(session_id, session)
 
-    if public_key is None:
-        public_key = get_public_key()
-
-    try:
-        payload = jwt.decode(token, public_key, algorithms=[algorithm])
-        user_id: int = payload.get("sub")
-        if user_id is None:
-            raise credentials_exception
-    except JWTError as e:
-        print(f"Error decoding JWT: {str(e)}")
-        raise credentials_exception
-
-    user = await session.get(User, user_id)
-    if user is None:
-        raise credentials_exception
-
-    return user
+    response.delete_cookie("session_id")
+    return {"message": "Logged out successfully"}

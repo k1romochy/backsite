@@ -11,11 +11,6 @@ if TYPE_CHECKING:
     from .user import User
 
 
-class Role(PyEnum):
-    USER = 'User'
-    ADMIN = 'Admin'
-
-
 class Item(Base):
     name: Mapped[str] = mapped_column(nullable=False)
     quantity: Mapped[int] = mapped_column(nullable=False)

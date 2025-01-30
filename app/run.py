@@ -29,6 +29,7 @@ app.include_router(general_router)
 app.include_router(item_router)
 app.include_router(auth_router)
 
+
 @app.get('/')
 def hello_index():
     return {

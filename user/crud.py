@@ -8,7 +8,6 @@ from sqlalchemy.orm import selectinload
 
 from core.models.user import User
 from user.schemas import UserCreate
-import auth.utils as auth_utils
 
 
 async def get_users(session: AsyncSession):
