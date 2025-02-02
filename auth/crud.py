@@ -44,7 +44,6 @@ async def get_current_user(
         session_obj = session_obj.scalar_one_or_none()
         if session_obj:
             return session_obj.user
-    return None
 
 
 async def create_session(user_id: int, session_id: str, session: AsyncSession):

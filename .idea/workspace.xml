@@ -5,20 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="jwt auth">
-      <change afterPath="$PROJECT_DIR$/auth/crud.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/cookie.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/models/item_user_assoc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth/crud.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth/jwt_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth/jwt_auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/models/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/item/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/item/crud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/item/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/item/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/item/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/crud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,17 +59,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.config.executor": "Run",
-    "Python.crud.executor": "Run",
-    "Python.run.executor": "Run",
-    "Python.utils.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "settings.editor.selected.configurable": "reference.idesettings.debugger.python"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.crud.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/vscode/winterr&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.idesettings.debugger.python&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

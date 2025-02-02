@@ -4,6 +4,7 @@ from sqlalchemy import ForeignKey, Enum
 from enum import Enum as PyEnum
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
+from .item_user_assoc import ItemUser
 from .user import User
 from .base import Base
 
@@ -17,4 +18,4 @@ class Item(Base):
     condition: Mapped[str] = mapped_column(nullable=False)
 
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id'), nullable=False)
-    user: Mapped['User'] = relationship('User', back_populates='items')
+    users: Mapped[list['User']] = relationship('User', secondary='item_user_association', back_populates='items')

@@ -17,7 +17,7 @@ from user.crud import get_user_by_username
 from user.schemas import UserModel
 
 router = APIRouter(prefix='/auth', tags=['auth'])
-COOKIE_SESSION_ID_KEY = 'web-app-session-id'
+COOKIE_SESSION_ID_KEY = 'session_id'
 
 
 @router.post("/login/", response_model=Token)
@@ -38,7 +38,7 @@ async def auth_user_jwt(
     session_id = str(uuid.uuid4())
     await create_session(user.id, session_id, session)
 
-    response.set_cookie(session_id)
+    response.set_cookie(key=COOKIE_SESSION_ID_KEY, value=session_id)
 
     return Token(access_token=token, token_type="Bearer")
 

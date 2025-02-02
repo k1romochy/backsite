@@ -22,7 +22,6 @@ async def create_item(
     current_user: User = Depends(get_current_user),
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
-    print(f"current_user: {current_user.id}")
     new_item = ItemCRUD(
         name=item_in.name,
         quantity=item_in.quantity,
@@ -40,13 +39,14 @@ async def get_item(item_id: int,
     return await item.get_item(item_id=item_id, session=session)
 
 
-@router.post('/{item_id}/update/', response_model=Item)
-async def update_item(item_id: int, new_quantity: int,
+@router.patch('/{item_id}/update/', response_model=Item)
+async def update_item(item_id: int, new_quantity: int, new_condition: str,
                       session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
-    return await item.update_item_quantity(item_id=item_id, new_quantity=new_quantity, session=session)
+    return await item.update_item(item_id=item_id, new_quantity=new_quantity, new_condition=new_condition,
+                                  session=session)
 
 
-@router.get('/{item_id}/user/', response_model=Item)
+@router.get('/{item_id}/user/')
 async def get_item_with_user(item_id: int,
                              session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.get_item_with_user(item_id=item_id, session=session)
@@ -56,3 +56,9 @@ async def get_item_with_user(item_id: int,
 async def delete_item(item_id: int,
                       session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     await item.delete_item_by_id(item_id=item_id, session=session)
+
+
+@router.post('/{item_id}/assign/')
+async def add_user_assing(item_id: int, user_id: int,
+                          session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+    return await item.assign_user(item_id=item_id, user_id=user_id, session=session)
