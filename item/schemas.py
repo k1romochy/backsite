@@ -19,3 +19,8 @@ class Item(ItemModel):
 
 class ItemCreate(ItemModel):
     pass
+
+
+class ItemUpdateRequest(BaseModel):
+    quantity: int
+    condition: str

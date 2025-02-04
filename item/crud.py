@@ -8,6 +8,7 @@ from sqlalchemy.orm import selectinload, joinedload
 
 from core.models import User
 from core.models.item import Item
+from item.schemas import ItemUpdateRequest
 
 
 async def create_item(item: Item, session: AsyncSession) -> Item:
@@ -38,15 +39,15 @@ async def get_items(session: AsyncSession) -> Sequence[Item]:
     return items
 
 
-async def update_item(item_id: int, session: AsyncSession, new_quantity: int, new_condition: str) -> Optional[Item]:
+async def update_item(item_id: int, session: AsyncSession, item_update: ItemUpdateRequest) -> Optional[Item]:
     stmt = select(Item).where(Item.id == item_id)
 
     result = await session.execute(stmt)
     item = result.scalars().first()
 
     if item:
-        item.quantity = new_quantity
-        item.condition = new_condition
+        item.quantity = item_update.quantity
+        item.condition = item_update.condition
         session.add(item)
         await session.commit()
         return item

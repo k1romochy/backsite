@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from auth.crud import get_current_user
 from core.models.db_helper import db_helper
-from item.schemas import ItemCreate, Item
+from item.schemas import ItemCreate, Item, ItemUpdateRequest
 from item import crud as item
 from user.schemas import User
 from core.models.item import Item as ItemCRUD
@@ -39,11 +39,10 @@ async def get_item(item_id: int,
     return await item.get_item(item_id=item_id, session=session)
 
 
-@router.patch('/{item_id}', response_model=Item)
-async def update_item(item_id: int, new_quantity: int, new_condition: str,
+@router.patch('/{item_id}/', response_model=Item)
+async def update_item(item_id: int, item_update: ItemUpdateRequest,
                       session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
-    return await item.update_item(item_id=item_id, new_quantity=new_quantity, new_condition=new_condition,
-                                  session=session)
+    return await item.update_item(item_id=item_id, item_update=item_update, session=session)
 
 
 @router.get('/{item_id}/user/')
