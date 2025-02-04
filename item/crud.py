@@ -18,16 +18,16 @@ async def create_item(item: Item, session: AsyncSession) -> Item:
     return item
 
 
-async def delete_item_by_id(item_id: int, session: AsyncSession) -> None:
-    stmt = select(Item).where(Item.id == item_id)
-    result = await session.execute(stmt)
-    item = result.scalar_one_or_none()
+async def delete_item_by_id(item_id: int, session: AsyncSession):
+    result = await session.execute(select(Item).where(Item.id == item_id))
+    item = result.scalars().first()
 
-    if item is not None:
-        await session.delete(stmt)
+    if item:
+        await session.delete(item)
         await session.commit()
+        return {"message": "Item deleted successfully"}
     else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+        raise HTTPException(status_code=404, detail="Item not found")
 
 
 async def get_items(session: AsyncSession) -> Sequence[Item]:

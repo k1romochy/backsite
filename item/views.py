@@ -39,7 +39,7 @@ async def get_item(item_id: int,
     return await item.get_item(item_id=item_id, session=session)
 
 
-@router.patch('/{item_id}/update/', response_model=Item)
+@router.patch('/{item_id}', response_model=Item)
 async def update_item(item_id: int, new_quantity: int, new_condition: str,
                       session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.update_item(item_id=item_id, new_quantity=new_quantity, new_condition=new_condition,
@@ -52,10 +52,10 @@ async def get_item_with_user(item_id: int,
     return await item.get_item_with_user(item_id=item_id, session=session)
 
 
-@router.delete('/{item_id}/', response_model=Item)
+@router.delete('/{item_id}/')
 async def delete_item(item_id: int,
                       session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
-    await item.delete_item_by_id(item_id=item_id, session=session)
+    return await item.delete_item_by_id(item_id=item_id, session=session)
 
 
 @router.post('/{item_id}/assign/')

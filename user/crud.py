@@ -66,3 +66,11 @@ async def registrate_user(user: UserCreate, session: AsyncSession):
     await session.refresh(user_db)
 
     return user_db
+
+
+async def get_me(user_id: int, session: AsyncSession):
+    result = await session.execute(select(User).where(User.id == user_id))
+    user = result.scalars().first()
+
+    return user
+

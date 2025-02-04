@@ -1,6 +1,7 @@
 import uvicorn
 
 from fastapi import FastAPI, Body, Path
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.gen_router import router as general_router
 from user.views import router as user_router
@@ -28,6 +29,20 @@ app.include_router(user_router)
 app.include_router(general_router)
 app.include_router(item_router)
 app.include_router(auth_router)
+
+
+origins = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 
 @app.get('/')
