@@ -93,3 +93,5 @@ async def assign_user(item_id: int, user_id: int, session: AsyncSession):
     await session.commit()
 
     return {'message': 'Success'}
+
+async def unassign_user
