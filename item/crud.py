@@ -93,3 +93,21 @@ async def assign_user(item_id: int, user_id: int, session: AsyncSession):
     await session.commit()
 
     return {'message': 'Success'}
+
+
+async def unassign_user(item_id: int, user_id: int, session: AsyncSession):
+    stmt = select(Item).options(selectinload(Item.users)).where(Item.id == item_id)
+    result = await session.execute(stmt)
+    item = result.scalar_one_or_none()
+
+    stmt = select(User).where(User.id == user_id)
+    user_result = await session.execute(stmt)
+    user = user_result.scalar_one_or_none()
+
+    if not item or not user:
+        raise HTTPException(status_code=404, detail="User or Item not found")
+
+    item.users.remove(user)
+    await session.commit()
+
+    return {'message': 'Success'}
