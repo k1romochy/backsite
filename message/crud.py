@@ -8,7 +8,7 @@ from sqlalchemy.orm import selectinload, joinedload
 
 from core.models.message import Message
 from core.models.user import User
-from message.schemas import MessageUpdateCond
+from message.schemas import MessageUpdateCond, MessageUpdateMess
 
 
 async def create_message(session: AsyncSession,
@@ -42,7 +42,7 @@ async def get_message_by_id(session: AsyncSession,
          raise HTTPException(status_code=404, detail="Message not found")
 
 
-async def update_message(message_id: int, session: AsyncSession, ms_update: MessageUpdateCond) -> Optional[Message]:
+async def update_messagecond(message_id: int, session: AsyncSession, ms_update: MessageUpdateCond) -> Optional[Message]:
     stmt = select(Message).where(Message.id == message_id)
 
     result = await session.execute(stmt)
@@ -50,6 +50,21 @@ async def update_message(message_id: int, session: AsyncSession, ms_update: Mess
 
     if message:
         message.condition = ms_update.condition
+        session.add(message)
+        await session.commit()
+        return message
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+
+
+async def update_messagemess(message_id: int, session: AsyncSession, ms_update: MessageUpdateMess) -> Optional[Message]:
+    stmt = select(Message).where(Message.id == message_id)
+
+    result = await session.execute(stmt)
+    message = result.scalars().first()
+
+    if message:
+        message.condition = ms_update.message
         session.add(message)
         await session.commit()
         return message

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="work with messages, views work with user">
+    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="work with messages, models and updt mess">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/alembic.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/message/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/crud.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/message/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/message/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/views.py" afterDir="false" />
@@ -227,7 +228,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738930699263</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="work with messages, models and updt mess">
+      <option name="closed" value="true" />
+      <created>1738933240396</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1738933240396</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -267,6 +276,7 @@
     <MESSAGE value="work with messages" />
     <MESSAGE value="work with messages, views" />
     <MESSAGE value="work with messages, views work with user" />
-    <option name="LAST_COMMIT_MESSAGE" value="work with messages, views work with user" />
+    <MESSAGE value="work with messages, models and updt mess" />
+    <option name="LAST_COMMIT_MESSAGE" value="work with messages, models and updt mess" />
   </component>
 </project>

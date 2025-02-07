@@ -13,3 +13,7 @@ class MessageModelId(MessageModel):
 
 class MessageUpdateCond(BaseModel):
     condition: str
+
+
+class MessageUpdateMess(BaseModel):
+    message: str

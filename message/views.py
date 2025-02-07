@@ -5,7 +5,7 @@ from starlette import status
 
 from auth.crud import get_current_user
 from core.models.db_helper import db_helper
-from message.schemas import MessageModelId, MessageModel, MessageUpdateCond
+from message.schemas import MessageModelId, MessageModel, MessageUpdateCond, MessageUpdateMess
 from core.models.message import Message as msgCRUD
 from user.schemas import User
 import message.crud as mess
@@ -32,8 +32,15 @@ async def get_message(message_id: int,
     return await mess.get_message_by_id(message_id=message_id, session=session)
 
 
-@router.patch('/{message_id}/')
-async def update_msg(message_id: int,
+@router.patch('/{message_id}/condition/')
+async def update_msgcond(message_id: int,
                      session: AsyncSession = Depends(db_helper.scoped_session_dependency),
                      message_update: MessageUpdateCond = None):
-    return await mess.update_message(message_id=message_id, session=session, ms_update=message_update)
+    return await mess.update_messagecond(message_id=message_id, session=session, ms_update=message_update)
+
+
+@router.patch('/{message_id}/text/')
+async def update_msgtext(message_id: int,
+                     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+                     message_update: MessageUpdateMess = None):
+    return await mess.update_messagemess(message_id=message_id, session=session, ms_update=message_update)
