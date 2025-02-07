@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+  server:
+    build: .
+    command: >
+      sh -c "
+      echo 'Waiting for PostgreSQL...';
+      sleep 10;
+      until pg_isready -h postgres -p 5432 -q; do
+        echo 'Still waiting...';
+        sleep 5;
+      done;
+      echo 'PostgreSQL is ready!';
+      alembic upgrade head &&
+      uvicorn app.run:app --host 0.0.0.0 --port 8000 --reload
+      "
+    env_file:
+      - ./.env
+    restart: always
+    depends_on:
+      - postgres
+    networks:
+      - network
+    ports:
+      - "8000:8000"
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container_backsite
+    restart: always
+    ports:
+      - "5401:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "Egor100209"
+      POSTGRES_DB: maindb
+    networks:
+      - network
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "5500:80"
+    networks:
+      - network
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "example@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "123456"
+    container_name: pgadmin_container_backsite
+    volumes:
+      - pgadmin_volume:/var/lib/pgadmin/
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  postgres_volume:
+  pgadmin_volume:
