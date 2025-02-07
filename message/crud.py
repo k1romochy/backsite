@@ -17,8 +17,8 @@ async def create_message(session: AsyncSession,
 
 
 async def delete_message_by_id(session: AsyncSession,
-                               mess_id: int):
-    stmt = await session.execute(select(Message).where(Message.id==mess_id))
+                               message_id: int):
+    stmt = await session.execute(select(Message).where(Message.id==message_id))
     message = stmt.scalars().first()
 
     if message:
@@ -28,3 +28,12 @@ async def delete_message_by_id(session: AsyncSession,
     else:
         raise HTTPException(status_code=404, detail="Message not found")
 
+async def get_message_by_id(session: AsyncSession,
+                            message_id: int):
+     stmt = await session.execute(select(Message).options(joinedload(Message.user)).where(Message.id == message_id))
+     message = stmt.scalar_one_or_none()
+
+     if message:
+         return message
+     else:
+         raise HTTPException(status_code=404, detail="Message not found")
