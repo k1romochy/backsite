@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="jwt auth">
-      <change beforePath="$PROJECT_DIR$/item/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/item/crud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/item/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="jwt auth" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,12 +31,12 @@
     &quot;assignee&quot;: &quot;k1romochy&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:k1romochy/backsite.git",
-    "accountId": "8aa38002-ff5d-42b1-b4ad-5e48415acef9"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:k1romochy/backsite.git&quot;,
+    &quot;accountId&quot;: &quot;8aa38002-ff5d-42b1-b4ad-5e48415acef9&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
