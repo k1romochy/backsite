@@ -5,7 +5,7 @@ from starlette import status
 
 from auth.crud import get_current_user
 from core.models.db_helper import db_helper
-from user.schemas import UserCreate, User, UserModel
+from user.schemas import UserCreate, User, UserModel, UserModelMess
 from user import crud as user
 
 
@@ -38,8 +38,14 @@ async def register_user(user_in: UserCreate,
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='User with this email already exists')
 
 
-@router.get('/show/me/', response_model=UserModel)
+@router.get('/show/me/', response_model=UserModelMess)
 async def show_me(current_user: User = Depends(get_current_user),
                   session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     user_id = current_user.id
     return await user.get_me(user_id=user_id, session=session)
+
+
+@router.get('/{user_id}/messages/')
+async def get_user_mess(user_id: int,
+                        session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+    return await user.get_user_messages(user_id=user_id, session=session)

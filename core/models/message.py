@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Message(Base):
-    message: str = mapped_column(nullable=False)
+    message: Mapped[str] = mapped_column(nullable=False)
 
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id'), nullable=False)
     user: Mapped['User'] = relationship('User', back_populates='messages')

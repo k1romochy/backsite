@@ -70,10 +70,13 @@ async def registrate_user(user: UserCreate, session: AsyncSession):
 
 
 async def get_me(user_id: int, session: AsyncSession):
-    result = await session.execute(select(User).where(User.id == user_id))
+    result = await session.execute(select(User).where(User.id == user_id).options(selectinload(User.messages)))
     user = result.scalars().first()
 
-    return user
+    if user:
+        return user
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
 
 async def get_user_messages(user_id: int, session: AsyncSession):

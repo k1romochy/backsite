@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="work with messages">
+    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="work with messages, views">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/models/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/message.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/crud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/crud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738920039355</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="work with messages, views">
+      <option name="closed" value="true" />
+      <created>1738928617826</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1738928617826</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,6 +258,7 @@
     <MESSAGE value="func get_current_user" />
     <MESSAGE value="jwt auth" />
     <MESSAGE value="work with messages" />
-    <option name="LAST_COMMIT_MESSAGE" value="work with messages" />
+    <MESSAGE value="work with messages, views" />
+    <option name="LAST_COMMIT_MESSAGE" value="work with messages, views" />
   </component>
 </project>
