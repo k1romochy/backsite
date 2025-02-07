@@ -10,10 +10,9 @@ if TYPE_CHECKING:
     from .user import User
 
 
-class Item(Base):
-    name: Mapped[str] = mapped_column(nullable=False)
-    quantity: Mapped[int] = mapped_column(nullable=False)
-    condition: Mapped[str] = mapped_column(nullable=False)
+class Message(Base):
+    message: str = mapped_column(nullable=False)
+    condition: str = mapped_column(server_default='На рассмотрении')
 
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id'), nullable=False)
-    users: Mapped[list['User']] = relationship('User', secondary='item_user_association', back_populates='items')
+    user: Mapped['User'] = relationship('User', back_populates='messages')

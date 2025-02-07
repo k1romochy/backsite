@@ -7,6 +7,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import selectinload
 
 from core.models.user import User
+from core.models.message import Message
 from user.schemas import UserCreate
 
 
@@ -74,3 +75,12 @@ async def get_me(user_id: int, session: AsyncSession):
 
     return user
 
+
+async def get_user_messages(user_id: int, session: AsyncSession):
+    stmt = await session.execute(select(User).where(User.id==user_id).options(selectinload(User.messages)))
+    user = stmt.scalar_one_or_none()
+
+    if user is not None:
+        return user.messages
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")

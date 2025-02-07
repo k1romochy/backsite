@@ -6,7 +6,7 @@ from sqlalchemy import select, Result, Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
 
-from core.models import User
+from core.models.user import User
 from core.models.item import Item
 from item.schemas import ItemUpdateRequest
 
@@ -77,6 +77,12 @@ async def get_item_with_user(item_id: int, session: AsyncSession):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
 
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
+from sqlalchemy.orm import selectinload
+from fastapi import HTTPException
+from sqlalchemy.exc import IntegrityError
+
 async def assign_user(item_id: int, user_id: int, session: AsyncSession):
     stmt = select(Item).options(selectinload(Item.users)).where(Item.id == item_id)
     result = await session.execute(stmt)
@@ -89,8 +95,16 @@ async def assign_user(item_id: int, user_id: int, session: AsyncSession):
     if not item or not user:
         raise HTTPException(status_code=404, detail="User or Item not found")
 
+    if user in item.users:
+        raise HTTPException(status_code=400, detail="User already assigned to item")
+
     item.users.append(user)
-    await session.commit()
+
+    try:
+        await session.commit()
+    except IntegrityError:
+        await session.rollback()
+        raise HTTPException(status_code=500, detail="Database error while assigning user")
 
     return {'message': 'Success'}
 
@@ -100,14 +114,25 @@ async def unassign_user(item_id: int, user_id: int, session: AsyncSession):
     result = await session.execute(stmt)
     item = result.scalar_one_or_none()
 
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+
     stmt = select(User).where(User.id == user_id)
     user_result = await session.execute(stmt)
     user = user_result.scalar_one_or_none()
 
-    if not item or not user:
-        raise HTTPException(status_code=404, detail="User or Item not found")
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    if user not in item.users:
+        raise HTTPException(status_code=400, detail="User is not assigned to this item")
 
     item.users.remove(user)
-    await session.commit()
+
+    try:
+        await session.commit()
+    except IntegrityError:
+        await session.rollback()
+        raise HTTPException(status_code=500, detail="Database error while unassigning user")
 
     return {'message': 'Success'}

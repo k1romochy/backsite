@@ -63,7 +63,7 @@ async def add_user_assing(item_id: int, user_id: int,
     return await item.assign_user(item_id=item_id, user_id=user_id, session=session)
 
 
-@router.delete('/{item_id}/unassign/')
+@router.post('/{item_id}/unassign/')
 async def delete_user_assign(item_id: int, user_id: int,
                           session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.unassign_user(item_id=item_id, user_id=user_id, session=session)

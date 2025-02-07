@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from .item import Item
     from .cookie import SessionModel
     from . import ItemUser
+    from .message import Message
 
 
 class User(Base):
@@ -19,3 +20,4 @@ class User(Base):
     items: Mapped[list['Item']] = relationship('Item', secondary='item_user_association', back_populates='users')
     session: Mapped['SessionModel'] = relationship('SessionModel', back_populates='user',
                                                     cascade="all, delete-orphan")
+    messages: Mapped[list['Message']] = relationship('Message', back_populates='user')
