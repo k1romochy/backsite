@@ -171,3 +171,4 @@ cython_debug/
 .pypirc
 auth/jwt-private.pem
 auth/jwt-public.pem
+.idea/misc.xml
