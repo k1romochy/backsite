@@ -8,7 +8,7 @@ from sqlalchemy.orm import selectinload, joinedload
 
 from core.models.message import Message
 from core.models.user import User
-from message.schemas import MessageUpdateCond, MessageUpdateMess
+from message.schemas import MessageUpdateMess
 
 
 async def create_message(session: AsyncSession,
@@ -25,48 +25,26 @@ async def delete_message_by_id(session: AsyncSession,
     message = stmt.scalars().first()
 
     if message:
-        session.delete(message)
+        await session.delete(message)
         await session.commit()
         return {'message': 'Item delete'}
     else:
         raise HTTPException(status_code=404, detail="Message not found")
 
+
 async def get_message_by_id(session: AsyncSession,
                             message_id: int):
-     stmt = await session.execute(select(Message).options(joinedload(Message.user)).where(Message.id == message_id))
-     message = stmt.scalar_one_or_none()
+       stmt = await session.execute(select(Message).options(joinedload(Message.user)).where(Message.id == message_id))
+       message = stmt.scalar_one_or_none()
 
-     if message:
+       if message:
          return message
-     else:
+       else:
          raise HTTPException(status_code=404, detail="Message not found")
 
 
-async def update_messagecond(message_id: int, session: AsyncSession, ms_update: MessageUpdateCond) -> Optional[Message]:
-    stmt = select(Message).where(Message.id == message_id)
+async def get_all_mess(session: AsyncSession):
+    stmt = await session.execute(select(Message).options(selectinload(Message.item), selectinload(Message.user)))
 
-    result = await session.execute(stmt)
-    message = result.scalars().first()
-
-    if message:
-        message.condition = ms_update.condition
-        session.add(message)
-        await session.commit()
-        return message
-    else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
-
-
-async def update_messagemess(message_id: int, session: AsyncSession, ms_update: MessageUpdateMess) -> Optional[Message]:
-    stmt = select(Message).where(Message.id == message_id)
-
-    result = await session.execute(stmt)
-    message = result.scalars().first()
-
-    if message:
-        message.condition = ms_update.message
-        session.add(message)
-        await session.commit()
-        return message
-    else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+    messages = stmt.scalars().all()
+    return messages

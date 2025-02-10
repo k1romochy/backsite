@@ -38,7 +38,7 @@ async def auth_user_jwt(
     session_id = str(uuid.uuid4())
     await create_session(user.id, session_id, session)
 
-    response.set_cookie(key=COOKIE_SESSION_ID_KEY, value=session_id)
+    response.set_cookie(key=COOKIE_SESSION_ID_KEY, value=session_id, httponly=True, secure=False, samesite='lax')
 
     return Token(access_token=token, token_type="Bearer")
 

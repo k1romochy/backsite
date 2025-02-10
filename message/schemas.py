@@ -1,8 +1,11 @@
+import datetime
+
 from pydantic import BaseModel, ConfigDict
 
 
 class MessageModel(BaseModel):
-    message: str
+    message: str | None
+    item_id: int | None
 
 
 class MessageModelId(MessageModel):
@@ -11,9 +14,11 @@ class MessageModelId(MessageModel):
     model_config = ConfigDict(from_attributes=True, arbitrary_types_allowed=True)
 
 
-class MessageUpdateCond(BaseModel):
-    condition: str
-
-
 class MessageUpdateMess(BaseModel):
     message: str
+
+
+class MessageItem(MessageModelId):
+    username: str
+    item_name: str | None
+    created_at: datetime

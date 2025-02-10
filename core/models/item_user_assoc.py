@@ -4,7 +4,7 @@ from sqlalchemy import ForeignKey, UniqueConstraint
 from sqlalchemy import Table, Column, ForeignKey
 from core.models.base import Base
 
-ItemUser = Table(
+item_user_association = Table(
     "item_user_association",
     Base.metadata,
     Column("user_id", ForeignKey("user.id"), primary_key=True),
