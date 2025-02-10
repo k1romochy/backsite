@@ -4,33 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="work with messages, models and updt mess">
-      <change afterPath="$PROJECT_DIR$/core/models/item_order_assoc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/order.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/request.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order/crud.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order/schemas.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/request/crud.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/request/schemas.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/request/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/site.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth/jwt_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth/jwt_auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/item_user_assoc.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/item_user_assoc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/message.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/item/crud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/item/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/item/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/crud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/message/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/crud.py" afterDir="false" />
+    <list default="true" id="13b94296-17cd-4675-850c-b196e7ece885" name="Changes" comment="work">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738933240396</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="work">
+      <option name="closed" value="true" />
+      <created>1739218816078</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1739218816078</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -297,6 +280,7 @@
     <MESSAGE value="work with messages, views" />
     <MESSAGE value="work with messages, views work with user" />
     <MESSAGE value="work with messages, models and updt mess" />
-    <option name="LAST_COMMIT_MESSAGE" value="work with messages, models and updt mess" />
+    <MESSAGE value="work" />
+    <option name="LAST_COMMIT_MESSAGE" value="work" />
   </component>
 </project>
