@@ -172,3 +172,4 @@ cython_debug/
 auth/jwt-private.pem
 auth/jwt-public.pem
 .idea/misc.xml
+.DS_Store
