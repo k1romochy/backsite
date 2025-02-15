@@ -7,8 +7,9 @@ from .base import Base
 if TYPE_CHECKING:
     from .item import Item
     from .cookie import SessionModel
-    from . import ItemUser
     from .message import Message
+    from .request import Request
+    from .order import Order
 
 
 class User(Base):
@@ -21,3 +22,5 @@ class User(Base):
     session: Mapped['SessionModel'] = relationship('SessionModel', back_populates='user',
                                                     cascade="all, delete-orphan")
     messages: Mapped[list['Message']] = relationship('Message', back_populates='user')
+    requests: Mapped[list['Request']] = relationship('Request', back_populates='user')
+    orders: Mapped[list['Order']] = relationship('Order', back_populates='user')

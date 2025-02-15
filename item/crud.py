@@ -3,12 +3,15 @@ from typing import Optional
 from fastapi import status, HTTPException
 
 from sqlalchemy import select, Result, Sequence
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
+from starlette.responses import JSONResponse
 
 from core.models.user import User
 from core.models.item import Item
 from item.schemas import ItemUpdateRequest
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 async def create_item(item: Item, session: AsyncSession) -> Item:
@@ -31,7 +34,7 @@ async def delete_item_by_id(item_id: int, session: AsyncSession):
         raise HTTPException(status_code=404, detail="Item not found")
 
 
-async def get_items(session: AsyncSession) -> Sequence[Item]:
+async def get_items(session: AsyncSession):
     stmt = select(Item).order_by(Item.id)
     result: Result = await session.execute(stmt)
     items = result.scalars().all()
@@ -56,14 +59,14 @@ async def update_item(item_id: int, session: AsyncSession, item_update: ItemUpda
 
 
 async def get_item(item_id: int, session: AsyncSession) -> Item:
-    stmt = select(Item).where(Item.id == item_id)
+    stmt = select(Item).where(Item.id == item_id).options(selectinload(Item.users))
     result: Result = await session.execute(stmt)
     item = result.scalar_one_or_none()
 
-    if item is not None:
-        return item
-    else:
+    if item is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+
+    return item
 
 
 async def get_item_with_user(item_id: int, session: AsyncSession):
@@ -76,12 +79,6 @@ async def get_item_with_user(item_id: int, session: AsyncSession):
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
 
-
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
-from sqlalchemy.orm import selectinload
-from fastapi import HTTPException
-from sqlalchemy.exc import IntegrityError
 
 async def assign_user(item_id: int, user_id: int, session: AsyncSession):
     stmt = select(Item).options(selectinload(Item.users)).where(Item.id == item_id)

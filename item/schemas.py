@@ -1,7 +1,9 @@
 from pydantic import BaseModel, EmailStr, Field, ConfigDict
 
-from typing import Annotated
+from typing import Annotated, List
 from annotated_types import MaxLen, MinLen
+
+from user.schemas import User
 
 
 class ItemModel(BaseModel):
@@ -24,3 +26,7 @@ class ItemCreate(ItemModel):
 class ItemUpdateRequest(BaseModel):
     quantity: int
     condition: str
+
+
+class ItemUsersRequests(Item):
+    users: list[User]

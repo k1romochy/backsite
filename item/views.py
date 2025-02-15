@@ -1,22 +1,25 @@
+from typing import List
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from auth.crud import get_current_user
 from core.models.db_helper import db_helper
-from item.schemas import ItemCreate, Item, ItemUpdateRequest
+from item.schemas import ItemCreate, Item, ItemUpdateRequest, ItemUsersRequests
 from item import crud as item
 from user.schemas import User
 from core.models.item import Item as ItemCRUD
+
 
 router = APIRouter(prefix='/items', tags=['Items'])
 
 
 @router.get('/', response_model=list[Item])
-async def get_items(session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
+async def get_allitems(session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.get_items(session=session)
 
 
-@router.post("/create_item/", response_model=Item)
+@router.post("/create_item/", response_model=ItemCreate)
 async def create_item(
     item_in: ItemCreate,
     current_user: User = Depends(get_current_user),
@@ -33,7 +36,7 @@ async def create_item(
     return new_item
 
 
-@router.get('/{item_id}/', response_model=Item)
+@router.get('/{item_id}/', response_model=ItemUsersRequests)
 async def get_item(item_id: int,
                    session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.get_item(item_id=item_id, session=session)
@@ -57,13 +60,13 @@ async def delete_item(item_id: int,
     return await item.delete_item_by_id(item_id=item_id, session=session)
 
 
-@router.post('/{item_id}/assign/')
+@router.post('/{item_id}/assign/{user_id}/')
 async def add_user_assing(item_id: int, user_id: int,
                           session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.assign_user(item_id=item_id, user_id=user_id, session=session)
 
 
-@router.post('/{item_id}/unassign/')
+@router.post('/{item_id}/unassign/{user_id}/')
 async def delete_user_assign(item_id: int, user_id: int,
                           session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await item.unassign_user(item_id=item_id, user_id=user_id, session=session)

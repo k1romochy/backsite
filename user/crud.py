@@ -12,9 +12,8 @@ from user.schemas import UserCreate
 
 
 async def get_users(session: AsyncSession):
-    stmt = select(User).order_by(User.id)
-    result = await session.execute(stmt)
-    return result.scalars().all()
+    stmt = await session.execute(select(User).order_by(User.id).options(selectinload(User.messages)))
+    return stmt.scalars().all()
 
 
 async def delete_user(session: AsyncSession, user: User) -> None:
