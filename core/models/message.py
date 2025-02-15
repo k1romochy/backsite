@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 class Message(Base):
     message: Mapped[str] = mapped_column(nullable=False)
+    condition: Mapped[str] = mapped_column(server_default='На рассмотрении')
 
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id'), nullable=False)
     user: Mapped['User'] = relationship('User', back_populates='messages')
